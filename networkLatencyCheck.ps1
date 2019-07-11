@@ -2,7 +2,7 @@
 
 function tracktime {
     $timeTaken = Measure-Command -Expression {
-    Invoke-WebRequest -Uri $url -UseBasicParsing | Out-Null
+        Invoke-WebRequest -Uri $url -UseBasicParsing | Out-Null
     }
 
     $milliseconds = $timeTaken.TotalMilliseconds

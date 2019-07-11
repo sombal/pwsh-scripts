@@ -1,8 +1,11 @@
 #Start Transcript
-$logPath = "C:\Users\h67968202\OneDrive\Profiles\Work\Documents\Local\pwsh_transcripts"
-$transcriptDate = Get-Date -Format yyyyMMdd_HHmmss
-$transcriptPath = $logPath+"\"+$transcriptDate+".pslog"
-Start-Transcript -Path $transcriptPath | Out-Null
+function Start-Log {
+    $logPath = "path-to-logfile"
+    $transcriptDate = Get-Date -Format yyyyMMdd_HHmmss
+    $transcriptPath = $logPath+"\"+$transcriptDate+".pslog"
+    Start-Transcript -Path $transcriptPath | Out-Null
+}
+#Start-Log
 
 #Change Prompt Text
 function global:prompt {

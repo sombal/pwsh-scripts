@@ -1,4 +1,6 @@
-﻿$timing = Measure-Command { (New-Object System.Net.WebClient).DownloadFile("http://nl.archive.ubuntu.com/ubuntu-cdimages/17.10/release/ubuntu-17.10-live-server-amd64.iso","d:\temp\testimage.iso") }
+﻿$url = "http://nl.archive.ubuntu.com/ubuntu-cdimages/17.10/release/ubuntu-17.10-live-server-amd64.iso"
+$outPath = "d:\temp\testimage.iso"
+$timing = Measure-Command { (New-Object System.Net.WebClient).DownloadFile($url,$outPath) }
 $size = 566
 
 $speed = $size / $timing.Seconds
