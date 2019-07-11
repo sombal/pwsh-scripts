@@ -1,0 +1,1 @@
+[datetime]::FromFileTime((Get-ADComputer dhub4777 -Properties *).'ms-Mcs-AdmPwdExpirationTime')
