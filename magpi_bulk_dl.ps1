@@ -1,14 +1,16 @@
 ﻿$ErrorActionPreference = "Continue"
-$files = Get-Content -Path "C:\Users\basomogy\Downloads\list.txt"
 $prefix = "https://www.raspberrypi.org/magpi-issues/"
-$dest = "C:\Users\basomogy\Downloads\MagPi\"
+$magpiIssues = Invoke-WebRequest -UseBasicParsing -Uri $prefix -Method GET
+$fileList = $magpiIssues.Links | ForEach-Object {$_.href}
+$dest = "$($env:userprofile)\Desktop\MagPi\"
 $timing = Measure-Command {
-    foreach ($file in $files) {
-        $url = $prefix+$file
-        $destfile = $dest+$file
-        (New-Object System.Net.WebClient).DownloadFile("$url","$destfile")
-        #Invoke-WebRequest -UseBasicParsing -Uri $url -OutFile $destfile
-        Write-Host "." -NoNewline
+    ForEach ($magFile in $fileList) {
+        if ($magFile -like "*.pdf") {
+            $url = $prefix+$magFile
+            $destfile = $dest+$magFile                
+            (New-Object System.Net.WebClient).DownloadFile("$url","$destfile")
+            Write-Host "." -NoNewline
+        }
     }
 }
 $timing
