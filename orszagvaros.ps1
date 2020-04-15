@@ -29,7 +29,7 @@ function Start-Game {
         elseif ($char -eq "i") {
             Clear-Host
             Start-Countdown -Seconds 120 -Message "Mehet a játék! A jelenlegi betű: - $letter -"
-            $string = 'Lejárt az idő. Mégegy játék? (i|n)'
+            $string = "Lejárt az idő. Mégegy játék? (i|n)"
             Write-Host $string
             while ( $key = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown") ) {
                 $char = $key.Character
