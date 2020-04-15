@@ -255,7 +255,7 @@ class GraphicObject
 
         $deltaX = $endX - $startX
         $deltaY = $endY - $startY
-        $error = 0
+        $err = 0
         $deltaError = [Math]::Abs($deltaY / $deltaX)
 
         $y = $startY
@@ -270,11 +270,11 @@ class GraphicObject
         while($xCount -gt 0)
         {
             $newPoints.Add( ([Point]::New($x, $y, $zIndex)) )
-            $error =  $error + $deltaError
-            if($error -gt 0.5)
+            $err =  $err + $deltaError
+            if($err -gt 0.5)
             {
                 $y += $yIncr
-                $error--
+                $err--
             }
 
             $xCount--
