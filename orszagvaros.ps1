@@ -3,11 +3,13 @@
         $seconds,
         $message
     )
-    ForEach ( $Count in (1..$Seconds) )
-    {   Write-Progress -Id 1 -Activity $Message -Status "Visszaszámlálás: $($Seconds - $Count) másodperc" -PercentComplete ( ($Count / $Seconds) * 100 )
+    foreach ( $count in (1..$seconds) ) {   
+        Write-Progress -Id 1 -Activity $Message -Status "Visszaszámlálás: $($seconds - $count) másodperc" -PercentComplete ( ($Count / $Seconds) * 100 )
         Start-Sleep -Seconds 1
+        if (($seconds - $count) -le 6 -and ($seconds - $count) -ne 0) {[console]::beep(1600,300)}
     }
     Write-Progress -Id 1 -Activity $Message -Status "Completed" -PercentComplete 100 -Completed
+    [console]::beep(1600,300);[console]::beep(1600,1500)
 }
 function Start-Game {
     Clear-Host
@@ -15,6 +17,22 @@ function Start-Game {
     65..90 | ForEach-Object { $alph += [char]$_ }
     $letter = $alph | Get-Random
     if ($letter -eq "Q" -or $letter -eq "W" -or $letter -eq "Y" -or $letter -eq "X") { Start-Game } else {
+        $letter = switch ($letter) {
+            "A" {"A,Á"}
+            "C" {"C,CS"}
+            "D" {"D,DZ,DZS"}
+            "E" {"E,É"}
+            "G" {"G,GY"}
+            "I" {"I,Í"}
+            "J" {"J,LY"}
+            "N" {"N,NY"}
+            "O" {"O,Ó,Ö,Ő"}
+            "S" {"S,SZ"}
+            "T" {"T,TY"}
+            "U" {"U,Ú,Ü,Ű"}
+            "Z" {"Z,ZS"}
+            Default {$letter}
+        }
         Write-Host "A következő betű a(z): - $letter -"
         $string = "Jó lesz? Mehet? (i|n)"
         Write-Host $string
