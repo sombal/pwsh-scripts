@@ -9,7 +9,7 @@
         if (($seconds - $count) -le 6 -and ($seconds - $count) -ne 0) {[console]::beep(1600,300)}
     }
     Write-Progress -Id 1 -Activity $Message -Status "Completed" -PercentComplete 100 -Completed
-    [console]::beep(1600,300);[console]::beep(1600,1500)
+    [console]::beep(1600,300);./wsay.exe -v 6 -i ./orszagvaros.txt #[console]::beep(1600,1500)
 }
 function Start-Game {
     Clear-Host
