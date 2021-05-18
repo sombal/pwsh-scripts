@@ -18,6 +18,12 @@ Set-PSReadLineOption -PredictionViewStyle ListView
 Import-Module posh-git
 Import-Module oh-my-posh
 
+$psversion = ($PSVersionTable.PSVersion)
+if ($psversion.Major -eq 7 -and $psversion.Minor -ge 2) {
+    Import-Module Az.Tools.Predictor
+    Set-PSReadLineOption -PredictionSource HistoryAndPlugin
+}
+
 Set-PoshPrompt -Theme material
 
 <#
